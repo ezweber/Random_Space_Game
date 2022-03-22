@@ -14,14 +14,14 @@ screen = pygame.display.set_mode((800,600))
 
 #window name and icon
 pygame.display.set_caption("Space Game")
-icon = pygame.image.load('icon.png')
+icon = pygame.image.load('assets/icon.png')
 pygame.display.set_icon(icon)
 
 #background image
-background = pygame.image.load('background.png')
+background = pygame.image.load('assets/background.png')
 
 #background music
-mixer.music.load('background.wav')
+mixer.music.load('sounds/background.wav')
 mixer.music.play(-1)
     
 def startfunc():
@@ -31,7 +31,7 @@ def startfunc():
     global playery
     global playerx_change
 
-    player = pygame.image.load('player.png')
+    player = pygame.image.load('assets/player.png')
     playerx = screen.get_width() / 2
     playery = 480
     playerx_change = 0
@@ -54,9 +54,9 @@ def startfunc():
     for i in range(num_of_enemys):
         enemy_pic = random.randint(1,2)
         if enemy_pic == 1:
-            enemy.append(pygame.image.load('enemy.png'))
+            enemy.append(pygame.image.load('assets/enemy.png'))
         else:
-             enemy.append(pygame.image.load('enemy2.png'))
+             enemy.append(pygame.image.load('assets/enemy2.png'))
              
         enemyx.append(random.randint(0, screen.get_width()-65)) 
         enemyy.append(random.randint(50, 150)) 
@@ -71,7 +71,7 @@ def startfunc():
     global bullety_change
     global bullet_state
 
-    bullet = pygame.image.load('bullet.png')
+    bullet = pygame.image.load('assets/bullet.png')
     bulletx = 0
     bullety = playery
     bulletx_change = 0
@@ -84,7 +84,7 @@ def startfunc():
     global astroidy
     global astroidy_change
 
-    astroid = pygame.image.load('astroid.png')
+    astroid = pygame.image.load('assets/astroid.png')
     astroidx = random.randint(0, screen.get_width()-65)
     astroidy = 0
     astroidy_change = 5
@@ -177,7 +177,7 @@ while running:
                     playerx_change = 4
                 if event.key == pygame.K_SPACE:
                     if bullet_state == "ready":
-                        bullet_sound = mixer.Sound('laser.wav')
+                        bullet_sound = mixer.Sound('sounds/laser.wav')
                         bullet_sound.play()
                         bulletx = playerx
                         fire_bullet(playerx, bullety)
@@ -225,7 +225,7 @@ while running:
             #collision
             collision = iscollision(enemyx[i],enemyy[i],bulletx,bullety)
             if collision and bullet_state == "fire":
-                hit_sound = mixer.Sound('explosion.wav')
+                hit_sound = mixer.Sound('sounds/explosion.wav')
                 hit_sound.play()
                 bullety = 480
                 bullet_state ="ready"
@@ -257,7 +257,7 @@ while running:
         if astroid_collision(astroidx,astroidy,playerx,playery):
             gameover = True
             if played_hit_sound == False:
-                hit_sound = mixer.Sound('explosion.wav')
+                hit_sound = mixer.Sound('sounds/explosion.wav')
                 hit_sound.play()
                 played_hit_sound = True
 
